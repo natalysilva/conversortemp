@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="style.css">
+    <title>Conversor</title>
+</head>
+<body>
+    <h1>Conversor de Temperatura</h1>
+    <div id="tabela">
+        <label for="ftemperatura"></label><br>
+        <input type="text" id="numer" name="numer"><br>
+
+        <select id="temperaturas" value="">
+            <option value="C">Grau Celsius</option>
+            <option value="F">Grau Fahrenheit</option>
+            <option value="K">Grau Kelvin</option>
+            <option value="R">Grau Rankine</option>
+        </select>
+        <button id="botao">Converter</button>
+
+        <h2>Resultado:</h2>
+        <div id="resultado">
+            
+        </div>
+        
+        
+    </div>
+    <script>
+         
+         document.querySelector("#botao").onclick=Conversao;
+         function Conversao(){
+             var temp=document.querySelector("#temperaturas").value;
+             var numer=document.querySelector("#numer").value;
+             numer=numer.replace(",",".");
+             numer=parseFloat(numer);
+             var resultado=document.querySelector("#resultado");
+             var C=0;
+             var F=0;
+             var K=0;
+             var R=0;
+             
+             if(isNaN(numer)){
+                alert("Digite um número válido");
+                return
+             }else if(temp=='C'){
+                 F=numer*1.8+32;
+                 K=numer+273;
+                 R=(numer+273.15)*1.8;
+                 resultado.innerHTML="<p>"+F.toFixed(1)+"°F</p>"+
+                 "<p>"+K.toFixed(1)+"°K</p>"+
+                 "<p>"+R.toFixed(1)+"°R</p>"
+             }else if(temp=='F'){
+                 C=(numer-32)/1.8;
+                 K=(numer-32)*1.8+273;
+                 R=(numer+459.67);
+                 resultado.innerHTML="<p>"+C.toFixed(1)+"°C</p>"+
+                 "<p>"+K.toFixed(1)+"°K</p>"+
+                 "<p>"+R.toFixed(1)+"°R</p>"
+             }else if(temp=='K'){
+                 C=numer-273;
+                 F=(numer-273)*1.8+32;
+                 R=numer*1.8;
+                 resultado.innerHTML="<p>"+C.toFixed(1)+"°C</p>"+
+                 "<p>"+F.toFixed(1)+"°F</p>"+
+                 "<p>"+R.toFixed(1)+"°R</p>"
+             }else if(temp=='R'){
+                 C=(numer/8)-273.15;
+                 F=numer-459.96;
+                 K=numer/1.8;
+                 resultado.innerHTML="<p>"+C.toFixed(1)+"°C</p>"+
+                 "<p>"+F.toFixed(1)+"°F</p>"+
+                 "<p>"+K.toFixed(1)+"°K</p>"
+            }
+         }
+    
+
+    </script>
+</body>
+</html>
